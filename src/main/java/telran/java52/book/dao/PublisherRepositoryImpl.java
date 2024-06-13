@@ -11,7 +11,7 @@ import telran.java52.model.Publisher;
 
 @Repository
 public class PublisherRepositoryImpl implements PublisherRepository {
-	
+
 	@PersistenceContext
 	EntityManager em;
 
