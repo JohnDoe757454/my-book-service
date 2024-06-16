@@ -10,6 +10,6 @@ public interface AuthorRepository {
 
 	Author save(Author author);
 
-	void delete(Author author);
+	void deleteById(String authorName);
 
 }

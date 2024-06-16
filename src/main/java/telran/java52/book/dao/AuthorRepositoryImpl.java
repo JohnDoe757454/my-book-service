@@ -26,8 +26,8 @@ public class AuthorRepositoryImpl implements AuthorRepository {
 	}
 
 	@Override
-	public void delete(Author author) {
-		em.remove(author);
+	public void deleteById(String authorName) {
+		em.remove(findById(authorName).get());
 
 	}
 

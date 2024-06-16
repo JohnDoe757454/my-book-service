@@ -96,8 +96,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public AuthorsDto removeAuthor(String authorName) {
 		Author author = authorRepository.findById(authorName).orElseThrow(EntityNotFound::new);
-		bookRepository.deleteByAuthorsName(authorName);
-		authorRepository.delete(author);
+		authorRepository.deleteById(authorName);
 		return modelMapper.map(author, AuthorsDto.class);
 	}
 

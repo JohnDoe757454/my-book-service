@@ -19,9 +19,9 @@ public class PublisherRepositoryImpl implements PublisherRepository {
 	public Stream<Publisher> findDistinctByBooksAuthorsName(String author) {
 		
 		return em.createQuery(
-				"select distinct p.publisher_name from publisher p "
-				+ "left join book b on p.publisher_name=b.publisher_publisher_name "
-				+ "left join book_authors a on b.isbn=a.book_isbn where a.authors_name=:authorsName"
+				"select distinct p.publisherName from Publisher p "
+				+ "left join Book b on p.publisherName=b.publisher.publisherName "
+				+ "left join Author a on b.isbn=a.books.isbn where a.name=:authorsName"
 				).setParameter("authorsName", author).getResultStream();
 	}
 
