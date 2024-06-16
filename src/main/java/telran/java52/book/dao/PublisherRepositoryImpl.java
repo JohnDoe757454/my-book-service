@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 import org.springframework.stereotype.Repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import telran.java52.model.Publisher;
+import telran.java52.book.model.Publisher;
 
 @Repository
 public class PublisherRepositoryImpl implements PublisherRepository {
@@ -21,7 +21,7 @@ public class PublisherRepositoryImpl implements PublisherRepository {
 		return em.createQuery(
 				"select distinct p.publisherName from Publisher p "
 				+ "left join Book b on p.publisherName=b.publisher.publisherName "
-				+ "left join Author a on b.isbn=a.books.isbn where a.name=:authorsName"
+				+ "left join b.authors a on b.isbn=a.books.isbn where a.name=:authorsName"
 				).setParameter("authorsName", author).getResultStream();
 	}
 

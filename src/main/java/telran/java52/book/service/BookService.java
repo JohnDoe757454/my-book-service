@@ -1,4 +1,4 @@
-package telran.java52.service;
+package telran.java52.book.service;
 
 import telran.java52.book.dto.AuthorsDto;
 import telran.java52.book.dto.BookDto;

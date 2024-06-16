@@ -4,7 +4,7 @@ package telran.java52.book.dao;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import telran.java52.model.Publisher;
+import telran.java52.book.model.Publisher;
 
 public interface PublisherRepository  {
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import telran.java52.model.Book;
+import telran.java52.book.model.Book;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {

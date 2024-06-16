@@ -2,7 +2,7 @@ package telran.java52.book.dao;
 
 import java.util.Optional;
 
-import telran.java52.model.Book;
+import telran.java52.book.model.Book;
 
 
 public interface BookRepository {

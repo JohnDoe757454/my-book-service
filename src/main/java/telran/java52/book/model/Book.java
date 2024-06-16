@@ -1,4 +1,4 @@
-package telran.java52.model;
+package telran.java52.book.model;
 
 import java.io.Serializable;
 import java.util.Set;

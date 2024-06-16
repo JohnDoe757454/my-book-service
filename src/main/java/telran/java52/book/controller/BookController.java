@@ -1,4 +1,4 @@
-package telran.java52.controller;
+package telran.java52.book.controller;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import telran.java52.book.dto.AuthorsDto;
 import telran.java52.book.dto.BookDto;
-import telran.java52.service.BookService;
+import telran.java52.book.service.BookService;
 
 @RestController
 @RequiredArgsConstructor

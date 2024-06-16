@@ -1,4 +1,4 @@
-package telran.java52.service;
+package telran.java52.book.service;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,9 +14,9 @@ import telran.java52.book.dao.PublisherRepository;
 import telran.java52.book.dto.AuthorsDto;
 import telran.java52.book.dto.BookDto;
 import telran.java52.book.dto.exception.EntityNotFound;
-import telran.java52.model.Author;
-import telran.java52.model.Book;
-import telran.java52.model.Publisher;
+import telran.java52.book.model.Author;
+import telran.java52.book.model.Book;
+import telran.java52.book.model.Publisher;
 
 @Service
 @RequiredArgsConstructor
