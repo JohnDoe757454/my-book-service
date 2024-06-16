@@ -27,7 +27,7 @@ public class AuthorRepositoryImpl implements AuthorRepository {
 
 	@Override
 	public void delete(Author author) {
-		// TODO Auto-generated method stub
+		em.remove(author);
 
 	}
 

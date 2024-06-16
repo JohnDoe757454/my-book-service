@@ -33,10 +33,10 @@ public class BookServiceImpl implements BookService {
 			return false;
 		}
 		Publisher publisher = publisherRepository.findById(bookDto.getPublisher())
-				.orElse(publisherRepository.save(new Publisher(bookDto.getPublisher())));
+				.orElseGet(() -> publisherRepository.save(new Publisher(bookDto.getPublisher())));
 		Set<Author> authors = bookDto.getAuthors().stream()
 				.map(a -> authorRepository.findById(a.getName())
-						.orElse(authorRepository.save(new Author(a.getName(), a.getBirthDate()))))
+						.orElseGet(() -> authorRepository.save(new Author(a.getName(), a.getBirthDate()))))
 				.collect(Collectors.toSet());
 
 		Book book = new Book(bookDto.getIsbn(), bookDto.getTitle(), authors, publisher);
@@ -66,24 +66,23 @@ public class BookServiceImpl implements BookService {
 		return modelMapper.map(book, BookDto.class);
 	}
 
-	//@Transactional(readOnly = true)
+	// @Transactional(readOnly = true)
 	@Override
 	public BookDto[] findBooksByAuthor(String authorName) {
 		Author author = authorRepository.findById(authorName).orElseThrow(EntityNotFound::new);
-		//return bookRepository.findBooksByAuthorsName(author).map(b -> modelMapper.map(b, BookDto.class))
-		//		.toArray(BookDto[]::new);
-		return author.getBooks().stream().map(b -> modelMapper.map(b, BookDto.class))
-					.toArray(BookDto[]::new);
+		// return bookRepository.findBooksByAuthorsName(author).map(b ->
+		// modelMapper.map(b, BookDto.class))
+		// .toArray(BookDto[]::new);
+		return author.getBooks().stream().map(b -> modelMapper.map(b, BookDto.class)).toArray(BookDto[]::new);
 	}
 
-	//@Transactional(readOnly = true)
+	// @Transactional(readOnly = true)
 	@Override
 	public BookDto[] findBooksByPublisher(String publisherName) {
-		Publisher publisher= publisherRepository.findById(publisherName).orElseThrow(EntityNotFound::new);
+		Publisher publisher = publisherRepository.findById(publisherName).orElseThrow(EntityNotFound::new);
 //		return bookRepository.findBooksByPublisherPublisherName(publisher).map(b -> modelMapper.map(b, BookDto.class))
 //				.toArray(BookDto[]::new);
-		return publisher.getBooks().stream().map(b -> modelMapper.map(b, BookDto.class))
-				.toArray(BookDto[]::new);
+		return publisher.getBooks().stream().map(b -> modelMapper.map(b, BookDto.class)).toArray(BookDto[]::new);
 	}
 
 	@Transactional(readOnly = true)
@@ -96,15 +95,17 @@ public class BookServiceImpl implements BookService {
 	@Transactional(readOnly = true)
 	@Override
 	public String[] findPublishersByAuthor(String author) {
-		//return publisherRepository.findPublishersByAuthor(author);
-		return publisherRepository.findDistinctByBooksAuthorsName(author).map(Publisher::getPublisherName).toArray(String[]::new);
+		// return publisherRepository.findPublishersByAuthor(author);
+		return publisherRepository.findDistinctByBooksAuthorsName(author).map(Publisher::getPublisherName)
+				.toArray(String[]::new);
 	}
 
 	@Transactional
 	@Override
 	public AuthorsDto removeAuthor(String authorName) {
-		Author author=authorRepository.findById(authorName).orElseThrow(EntityNotFound::new);
-		//bookRepository.findBooksByAuthorsName(authorName).forEach(b-> bookRepository.delete(b));
+		Author author = authorRepository.findById(authorName).orElseThrow(EntityNotFound::new);
+		// bookRepository.findBooksByAuthorsName(authorName).forEach(b->
+		// bookRepository.delete(b));
 		bookRepository.deleteByAuthorsName(authorName);
 		authorRepository.delete(author);
 		return modelMapper.map(author, AuthorsDto.class);

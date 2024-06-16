@@ -29,7 +29,6 @@ public class BookRepositoryImpl implements BookRepository {
 
 	@Override
 	public void deleteByAuthorsName(String name) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -40,7 +39,7 @@ public class BookRepositoryImpl implements BookRepository {
 
 	@Override
 	public void delete(Book book) {
-		// TODO Auto-generated method stub
+		em.remove(book);
 
 	}
 
