@@ -4,8 +4,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import telran.java52.model.Publisher;
@@ -16,16 +14,15 @@ public class PublisherRepositoryImpl implements PublisherRepository {
 	@PersistenceContext
 	EntityManager em;
 
-	@Override
-	public String[] findPublishersByAuthor(String author) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public Stream<Publisher> findDistinctByBooksAuthorsName(String author) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return em.createQuery(
+				"select distinct p.publisher_name from publisher p "
+				+ "left join book b on p.publisher_name=b.publisher_publisher_name "
+				+ "left join book_authors a on b.isbn=a.book_isbn where a.authors_name=:authorsName"
+				).setParameter("authorsName", author).getResultStream();
 	}
 
 	@Override

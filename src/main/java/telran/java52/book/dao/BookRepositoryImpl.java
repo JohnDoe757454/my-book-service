@@ -1,7 +1,7 @@
 package telran.java52.book.dao;
 
 import java.util.Optional;
-import java.util.stream.Stream;
+
 
 import org.springframework.stereotype.Repository;
 
@@ -14,18 +14,6 @@ public class BookRepositoryImpl implements BookRepository {
 	
 	@PersistenceContext
 	EntityManager em;
-
-	@Override
-	public Stream<Book> findBooksByAuthorsName(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Stream<Book> findBooksByPublisherPublisherName(String publisherName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void deleteByAuthorsName(String name) {

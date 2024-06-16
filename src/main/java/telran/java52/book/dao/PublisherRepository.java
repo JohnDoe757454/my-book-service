@@ -10,9 +10,6 @@ import telran.java52.model.Publisher;
 
 public interface PublisherRepository  {
 
-	@Query("select distinct p.publisherName from Book b join b.publisher p join b.authors a where a.name=?1")
-	String[] findPublishersByAuthor(String author);
-	
 	Stream<Publisher> findDistinctByBooksAuthorsName(String author);
 
 	Optional<Publisher> findById(String publisher);
