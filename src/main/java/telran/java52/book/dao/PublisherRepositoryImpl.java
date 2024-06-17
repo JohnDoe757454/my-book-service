@@ -14,15 +14,14 @@ public class PublisherRepositoryImpl implements PublisherRepository {
 	@PersistenceContext
 	EntityManager em;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Stream<Publisher> findDistinctByBooksAuthorsName(String author) {
 		
 		return em.createQuery(
-				"select distinct p.publisherName from Publisher p "
-				+ "left join Book b on p.publisherName=b.publisher.publisherName "
-				+ "left join b.authors a on b.isbn=a.books.isbn where a.name=:authorsName"
-				).setParameter("authorsName", author).getResultStream();
+				"select distinct p from Book b "
+				+ "left join b.publisher p "
+				+ "join b.authors a where a.name=?1", Publisher.class)
+				.setParameter(1, author).getResultStream();
 	}
 
 	@Override
